@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Startup Budget Allocation Predictor</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 50px; }
+        h1 { color: #333; }
+        form { max-width: 600px; margin-bottom: 20px; }
+        label { display: block; margin: 10px 0 5px; }
+        input, select { width: 100%; padding: 8px; margin-bottom: 10px; }
+        button { padding: 10px 20px; background-color: #007BFF; color: white; border: none; cursor: pointer; }
+        button:hover { background-color: #0056b3; }
+        .result { margin-top: 20px; padding: 10px; border: 1px solid #ccc; }
+        .error { color: red; }
+    </style>
+</head>
+<body>
+    <h1>Startup Budget Allocation Predictor</h1>
+    <form method="POST">
+        <label for="industry">Industry:</label>
+        <select name="industry" id="industry" required>
+            <option value="Tech">Tech</option>
+            <option value="Healthcare">Healthcare</option>
+            <option value="Finance">Finance</option>
+            <!-- Add more industries as per your dataset -->
+        </select>
+
+        <label for="stage">Stage:</label>
+        <select name="stage" id="stage" required>
+            <option value="Early-stage">Early-stage</option>
+            <option value="Growth-stage">Growth-stage</option>
+            <option value="Mature">Mature</option>
+            <!-- Add more stages as per your dataset -->
+        </select>
+
+        <label for="revenue">Revenue ($):</label>
+        <input type="number" name="revenue" id="revenue" step="0.01" required>
+
+        <label for="company_age">Company Age (years):</label>
+        <input type="number" name="company_age" id="company_age" required>
+
+        <label for="profit_margin">Profit Margin (%):</label>
+        <input type="number" name="profit_margin" id="profit_margin" step="0.01" required>
+
+        <label for="employee_count">Employee Count:</label>
+        <input type="number" name="employee_count" id="employee_count" required>
+
+        <label for="growth_rate">Growth Rate (%):</label>
+        <input type="number" name="growth_rate" id="growth_rate" step="0.01" required>
+
+        <label for="operating_expenses">Operating Expenses ($):</label>
+        <input type="number" name="operating_expenses" id="operating_expenses" step="0.01" required>
+
+        <label for="net_profit">Net Profit ($):</label>
+        <input type="number" name="net_profit" id="net_profit" step="0.01" required>
+
+        <button type="submit">Predict Budget Allocation</button>
+    </form>
+
+    {% if error %}
+    <p class="error">{{ error }}</p>
+    {% endif %}
+
+    {% if prediction %}
+    <div class="result">
+        <h2>Predicted Budget Allocation (in %):</h2>
+        <ul>
+            {% for key, value in prediction.items() %}
+            <li>{{ key }}: {{ value }}%</li>
+            {% endfor %}
+        </ul>
+    </div>
+    {% endif %}
+</body>
+</html>
